@@ -24,64 +24,29 @@ Operational rules:
 - Treat each invocation as stateless.
 - Include the current date, geography, filters, exclusions, and desired output format directly in the prompt.
 - Use Bash timeouts up to `600000ms` for slower searches.
-
-Use Grok-4.20 online for:
-- URL discovery and candidate link finding,
-- live topic scans and current facts with citations,
-- filtering broad web results into a smaller verified URL list.
-
-Limitations:
-- It does not read raw source files or page HTML line-by-line.
-- It can return useful leads that still need URL verification.
+- Returns leads that still need URL verification; does not read raw HTML.
 
 ---
 
 ### 2) `curl` or Python for deterministic retrieval and verification
 
-After discovery, verify URLs with direct HTTP retrieval.
-
-Use `curl` for:
-- quick status and redirect checks,
-- content-type checks,
-- fast connectivity probes.
-
-Examples:
+After discovery, verify URLs with direct HTTP retrieval. Use `curl` for quick status / redirect / content-type checks; use Python (+ BeautifulSoup) for parsing and metadata extraction.
 
 ```bash
 curl -sI "https://example.com"
 curl -sL "https://example.com"
-```
 
-Use Python for:
-- status checks,
-- metadata extraction,
-- expired-page detection,
-- parsing structured or semi-structured pages.
-
-Helper:
-
-```bash
 uv run --with requests --with beautifulsoup4 \
   python scripts/http_probe.py <url1> <url2>
 ```
 
-Python plus BeautifulSoup is usually more reliable than raw shell pipelines for metadata extraction.
-
-Limitations:
-- `curl` and plain HTTP retrieval do not interpret JavaScript-heavy pages.
-- Some sites load partial HTML shell content but render the useful content only in-browser.
+Neither interprets JavaScript; some sites only render useful content in-browser.
 
 ---
 
 ### 3) Hyperbrowser for browser-visible truth
 
-Use Hyperbrowser when:
-- the page is JS-heavy,
-- the site is bot-protected,
-- rendered content matters,
-- browser state or authentication matters.
-
-This skill uses Hyperbrowser HyperAgent with `version="1.1.0"` and default browser model `gemini-3-flash-preview`.
+Use Hyperbrowser when the page is JS-heavy, bot-protected, or browser state / authentication matters. Uses HyperAgent `version="1.1.0"` with `gemini-3-flash-preview`.
 
 Set the API key first:
 
@@ -182,24 +147,4 @@ uv run --with hyperbrowser \
 
 ## Recommended retrieval order
 
-Choose the smallest sufficient tool.
-
-### General sequence
-1. Grok-4.20 online for URL discovery and live synthesis
-2. `curl` or Python for deterministic verification
-3. Hyperbrowser when browser-visible truth or stateful interaction matters
-
-### If the exact URL is already known
-1. `curl` or Python first
-2. Hyperbrowser only if HTTP retrieval is incomplete or misleading
-
-### If authentication is likely
-1. Create or prime a Hyperbrowser session
-2. Ask the user to complete login via `LIVE_URL`
-3. Resume with the same `SESSION_ID`
-
----
-
-## Files in this skill
-- `scripts/http_probe.py` — quick HTTP verification and metadata extraction
-- `scripts/hb_task.py` — Hyperbrowser task runner plus reusable session lifecycle helpers
+Choose the smallest sufficient tool. Default sequence: Grok-4.20 online → `curl`/Python → Hyperbrowser. Skip ahead when the exact URL is known (start at `curl`/Python) or authentication is required (start at Hyperbrowser session).
