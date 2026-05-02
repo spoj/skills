@@ -1,6 +1,6 @@
 ---
 name: web
-description: General web information retrieval using `llm -o online true` with Grok-4.20, `curl`, Python verification, and Hyperbrowser browser automation. Use for current facts, URL discovery, JS-heavy pages, and human-in-the-loop browser sessions.
+description: General web information retrieval using `llm -o online true` with Grok-4.3, `curl`, Python verification, and Hyperbrowser browser automation. Use for current facts, URL discovery, JS-heavy pages, and human-in-the-loop browser sessions.
 compatibility: Requires `curl`, `llm`, Python 3, and optionally `uv`, `hyperbrowser`, and `HYPERBROWSER_API_KEY` for browser tasks.
 ---
 
@@ -10,12 +10,12 @@ Use this skill when a task needs current web data, reliable URL discovery, deter
 
 ## Tool roles
 
-### 1) `llm -n -m openrouter/x-ai/grok-4.20 -o online true` for live search & synthesis
+### 1) `llm -n -m openrouter/x-ai/grok-4.3 -o online true` for live search & synthesis
 
-Use Grok-4.20 online search when you need current facts, URL discovery, broader reasoning across live sources, or a filtered list of official URLs.
+Use Grok-4.3 online search when you need current facts, URL discovery, broader reasoning across live sources, or a filtered list of official URLs.
 
 ```bash
-llm -n -m openrouter/x-ai/grok-4.20 -o online true \
+llm -n -m openrouter/x-ai/grok-4.3 -o online true \
   "Current date: 2026-04-17. Find the official documentation and status-related pages for ExampleCloud API authentication and rate limits. Return only direct official URLs as: Title | Site | URL. Exclude forums, mirrors, aggregators, and stale pages."
 ```
 
@@ -147,4 +147,4 @@ uv run --with hyperbrowser \
 
 ## Recommended retrieval order
 
-Choose the smallest sufficient tool. Default sequence: Grok-4.20 online → `curl`/Python → Hyperbrowser. Skip ahead when the exact URL is known (start at `curl`/Python) or authentication is required (start at Hyperbrowser session).
+Choose the smallest sufficient tool. Default sequence: Grok-4.3 online → `curl`/Python → Hyperbrowser. Skip ahead when the exact URL is known (start at `curl`/Python) or authentication is required (start at Hyperbrowser session).
