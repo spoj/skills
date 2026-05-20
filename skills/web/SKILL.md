@@ -46,7 +46,7 @@ Neither interprets JavaScript; some sites only render useful content in-browser.
 
 ### 3) Hyperbrowser for browser-visible truth
 
-Use Hyperbrowser when the page is JS-heavy, bot-protected, or browser state / authentication matters. Uses HyperAgent `version="1.1.0"` with `gemini-3-flash-preview`.
+Use Hyperbrowser when the page is JS-heavy, bot-protected, or browser state / authentication matters. Uses HyperAgent `version="1.1.0"` with `gemini-3.5-flash`.
 
 Set the API key first:
 

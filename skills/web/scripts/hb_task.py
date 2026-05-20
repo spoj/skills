@@ -38,7 +38,7 @@ def parse_args():
     p.add_argument("--max-steps", type=int, default=20)
     p.add_argument(
         "--llm",
-        default="gemini-3-flash-preview",
+        default="gemini-3.5-flash",
         choices=[
             "gpt-5.2",
             "gpt-5.1",
@@ -52,7 +52,7 @@ def parse_args():
             "claude-sonnet-4-6",
             "claude-sonnet-4-5",
             "gemini-2.5-flash",
-            "gemini-3-flash-preview",
+            "gemini-3.5-flash",
         ],
         help="Hyperbrowser model for browser tasks",
     )
