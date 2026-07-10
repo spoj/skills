@@ -1,6 +1,6 @@
 ---
 name: web
-description: General web information retrieval using `llm -o online true` with Grok-4.3, `curl`, and Python verification. Use for current facts, URL discovery, deterministic HTTP retrieval, and source verification.
+description: General web information retrieval using `llm -o online true` with Grok-4.5, `curl`, and Python verification. Use for current facts, URL discovery, deterministic HTTP retrieval, and source verification.
 compatibility: Requires `curl`, `llm`, Python 3, and optionally `uv` for Python helper scripts.
 ---
 
@@ -10,12 +10,12 @@ Use this skill when a task needs current web data, reliable URL discovery, deter
 
 ## Tool roles
 
-### 1) `llm -n -m openrouter/x-ai/grok-4.3 -o online true` for live search & synthesis
+### 1) `llm -n -m openrouter/x-ai/grok-4.5 -o online true` for live search & synthesis
 
-Use Grok-4.3 online search when you need current facts, URL discovery, broader reasoning across live sources, or a filtered list of official URLs.
+Use Grok-4.5 online search when you need current facts, URL discovery, broader reasoning across live sources, or a filtered list of official URLs.
 
 ```bash
-llm -n -m openrouter/x-ai/grok-4.3 -o online true \
+llm -n -m openrouter/x-ai/grok-4.5 -o online true \
   "Current date: 2026-05-21. Find the official documentation and status-related pages for ExampleCloud API authentication and rate limits. Return only direct official URLs as: Title | Site | URL. Exclude forums, mirrors, aggregators, and stale pages."
 ```
 
@@ -46,4 +46,4 @@ These tools do not interpret JavaScript. If a site only renders useful content i
 
 ## Recommended retrieval order
 
-Choose the smallest sufficient tool. Default sequence: Grok-4.3 online → `curl`/Python verification. Skip discovery when the exact URL is known and start at `curl`/Python.
+Choose the smallest sufficient tool. Default sequence: Grok-4.5 online → `curl`/Python verification. Skip discovery when the exact URL is known and start at `curl`/Python.
