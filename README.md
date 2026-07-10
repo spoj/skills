@@ -5,6 +5,7 @@ Personal [pi](https://github.com/mariozechner/pi-coding-agent) skills bundle.
 ## Skills
 
 - **`gemini-image`** — generate and edit images via Gemini image models.
+- **`inspire`** — draw mid-surprisal word dice for lateral thinking when the space is too open or the obvious angles feel exhausted.
 - **`web`** — web retrieval: Grok online search, `curl`/Python verification, Hyperbrowser automation, human-in-the-loop sessions.
 
 ## Install
@@ -28,6 +29,10 @@ skills/
 ├── gemini-image/
 │   ├── SKILL.md
 │   └── scripts/generate.py
+├── inspire/
+│   ├── SKILL.md
+│   ├── inspire.py
+│   └── words.txt
 └── web/
     ├── SKILL.md
     └── scripts/{http_probe.py,hb_task.py}
