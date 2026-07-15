@@ -1,7 +1,7 @@
 {
   "name": "spoj-skills",
-  "version": "0.1.0",
-  "description": "Personal pi skills bundle: gemini-image, inspire, and web.",
+  "version": "0.2.0",
+  "description": "Personal pi skills bundle: EML processing, Gemini image generation, inspiration, and web retrieval.",
   "keywords": ["pi-package"],
   "license": "MIT",
   "repository": {
