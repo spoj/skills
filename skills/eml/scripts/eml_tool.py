@@ -18,6 +18,14 @@ import sys
 from typing import Any
 
 
+def configure_utf8_stdio() -> None:
+    """Make redirected and console output deterministic on Windows."""
+    for stream_name in ("stdout", "stderr"):
+        stream = getattr(sys, stream_name)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="backslashreplace")
+
+
 class TextExtractor(HTMLParser):
     BREAK_TAGS = {"br", "p", "div", "li", "tr", "h1", "h2", "h3", "h4", "h5", "h6"}
     SKIP_TAGS = {"script", "style", "head", "title", "svg"}
@@ -298,6 +306,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    configure_utf8_stdio()
     args = parser().parse_args()
     if getattr(args, "body_preview", 0) < 0 or getattr(args, "max_chars", 1) < 1:
         raise SystemExit("character limits must be positive")
